@@ -1,0 +1,25 @@
+# R package compiled files
+src/*.o
+src/*.so
+src/*.dll
+src/RcppExports.cpp
+
+# R auto-generated
+R/RcppExports.R
+
+# RStudio
+*.Rproj
+.Rproj.user/
+
+# R environment / history
+.RData
+.Rhistory
+.Rapp.history
+
+# renv (if used in this directory — analysis projects use renv, not the package itself)
+renv/
+renv.lock
+
+# OS
+.DS_Store
+Thumbs.db

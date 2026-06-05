@@ -1,0 +1,91 @@
+---
+title: "Getting Started with turf"
+vignette: >
+  %\VignetteIndexEntry{Getting Started with turf}
+  %\VignetteEngine{quarto::html}
+  %\VignetteEncoding{UTF-8}
+---
+
+## What is TURF?
+
+TURF (Total Unduplicated Reach and Frequency) answers the question: *which combination of M items reaches the most people?* Given an N×J binary matrix where `mat[r, c] = 1` means respondent `r` is reached by item `c`, TURF exhaustively evaluates all C(J, M) possible bundles of M items and returns the top-K ranked by reach.
+
+Common applications include product line optimization, content menu design, and feature prioritization — anywhere you want to maximize the share of people who find at least one thing they like.
+
+## Basic Usage
+
+```{r}
+library(turf)
+data(reach)
+
+# reach is a 3602×12 binary matrix (respondents × items)
+dim(reach)
+```
+
+Run TURF for bundle sizes 3 through 5, keeping the top 10 results for each size:
+
+```{r}
+results <- turf(mat = reach, range = 3:5, keep = 10)
+head(results)
+```
+
+The output is a `data.table` with one row per result:
+
+| Column | Description |
+|--------|-------------|
+| `size` | Bundle size (M) |
+| `rank` | Rank within that bundle size (1 = highest reach) |
+| `reach` | Proportion of respondents reached (0–1) |
+| `freq` | Average number of items reaching each respondent |
+| `item1` … `itemM` | Column indices of the items in the bundle |
+
+## Multiple Audiences
+
+A common workflow is to run TURF for an overall sample and then for subgroups, with subgroup membership stored as binary columns in a demographics data frame:
+
+```{r}
+#| eval: false
+res <- list()
+res[["overall"]] <- turf(mat)
+
+for (i in names(demos)) {
+    res[[i]] <- turf(mat[demos[[i]] == 1, ])
+}
+
+output <- dplyr::bind_rows(res, .id = "audience")
+```
+
+## Four Execution Modes
+
+`turf()` provides two implementations and two threading modes:
+
+- **Implementation**: C++ (`cpp = TRUE`, default) or pure R (`cpp = FALSE`)
+- **Threading**: multi-core (`n_cores > 1`, default) or single-core (`n_cores = 1`)
+
+Multi-core parallelizes across bundle sizes, so the benefit scales with the number of values in `range`. C++ is substantially faster for large problems.
+
+### Small task (range = 3:5)
+
+```{r}
+microbenchmark::microbenchmark(
+    `R, 1 core`       = turf(reach, 3:5, n_cores = 1, cpp = FALSE),
+    `R, multi-core`   = turf(reach, 3:5, n_cores = 3, cpp = FALSE),
+    `C++, 1 core`     = turf(reach, 3:5, n_cores = 1, cpp = TRUE),
+    `C++, multi-core` = turf(reach, 3:5, n_cores = 3, cpp = TRUE),
+    times = 10
+)
+```
+
+### Large task (range = 6:8)
+
+```{r}
+microbenchmark::microbenchmark(
+    `R, 1 core`       = turf(reach, 6:8, n_cores = 1, cpp = FALSE),
+    `R, multi-core`   = turf(reach, 6:8, n_cores = 3, cpp = FALSE),
+    `C++, 1 core`     = turf(reach, 6:8, n_cores = 1, cpp = TRUE),
+    `C++, multi-core` = turf(reach, 6:8, n_cores = 3, cpp = TRUE),
+    times = 10
+)
+```
+
+**Rule of thumb:** Use the defaults (`cpp = TRUE`, `n_cores = detectCores() - 1`) for most analyses. The pure R fallback is available if you cannot compile C++ on a given machine.

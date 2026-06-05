@@ -1,0 +1,4 @@
+useDynLib(turf)
+importFrom(data.table, rbindlist)
+import(Rcpp, foreach, parallel, doParallel, iterators)
+export(turf, turf_m_c)
