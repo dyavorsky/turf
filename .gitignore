@@ -1,11 +1,7 @@
-# R package compiled files
+# R package compiled files (machine-specific, regenerated at install time)
 src/*.o
 src/*.so
 src/*.dll
-src/RcppExports.cpp
-
-# R auto-generated
-R/RcppExports.R
 
 # RStudio
 *.Rproj
