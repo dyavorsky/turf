@@ -5,7 +5,7 @@ Date: 2026-06-05
 Authors@R: person(
     "Dan", "Yavorsky",
     role = c("aut", "cre", "cph"),
-    email = "dan@gbkcollective.com"
+    email = "dyavorsky@gmail.com"
     )
 Description: Computes reach and frequency for all combinations of M items chosen
     from J items, retaining the top K combinations ranked by reach. Supports both
