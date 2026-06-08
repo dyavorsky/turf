@@ -18,4 +18,5 @@ Depends:
     R (>= 4.1)
 Imports: data.table, Rcpp, foreach, parallel, iterators, doParallel
 LinkingTo: Rcpp
+Suggests: microbenchmark, quarto
 VignetteBuilder: knitr, quarto
