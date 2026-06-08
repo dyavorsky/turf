@@ -13,6 +13,7 @@ Description: Computes reach and frequency for all combinations of M items chosen
     processing across bundle sizes.
 License: MIT
 Encoding: UTF-8
+LazyData: true
 Depends:
     R (>= 4.1)
 Imports: data.table, Rcpp, foreach, parallel, iterators, doParallel
