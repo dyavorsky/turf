@@ -16,6 +16,9 @@ src/*.dll
 renv/
 renv.lock
 
+# Quarto intermediate output
+vignettes/*_files/
+
 # OS
 .DS_Store
 Thumbs.db
