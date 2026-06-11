@@ -192,18 +192,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">C++, multi-core</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">turf</span>(reach, <span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">n_cores =</span> <span class="dv">3</span>, <span class="at">cpp =</span> <span class="cn">TRUE</span>),</span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">times =</span> <span class="dv">10</span></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Unit: milliseconds
+            expr      min       lq     mean    median       uq      max neval
+       R, 1 core 251.9434 262.2913 310.1368 323.69385 339.9925 353.6533    10
+   R, multi-core 596.3175 619.5098 632.9746 631.19500 644.0019 677.0054    10
+     C++, 1 core  83.5963  91.6451 105.6331  98.44005 114.3121 143.8613    10
+ C++, multi-core 469.8948 501.7300 531.8548 535.62570 555.0102 616.2333    10</code></pre>
+</div>
 </div>
 </section>
 <section id="large-task-range-68" class="level3">
 <h3 class="anchored" data-anchor-id="large-task-range-68">Large task (range = 6:8)</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>microbenchmark<span class="sc">::</span><span class="fu">microbenchmark</span>(</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">R, 1 core</span><span class="st">`</span>       <span class="ot">=</span> <span class="fu">turf</span>(reach, <span class="dv">6</span><span class="sc">:</span><span class="dv">8</span>, <span class="at">n_cores =</span> <span class="dv">1</span>, <span class="at">cpp =</span> <span class="cn">FALSE</span>),</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">R, multi-core</span><span class="st">`</span>   <span class="ot">=</span> <span class="fu">turf</span>(reach, <span class="dv">6</span><span class="sc">:</span><span class="dv">8</span>, <span class="at">n_cores =</span> <span class="dv">3</span>, <span class="at">cpp =</span> <span class="cn">FALSE</span>),</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">C++, 1 core</span><span class="st">`</span>     <span class="ot">=</span> <span class="fu">turf</span>(reach, <span class="dv">6</span><span class="sc">:</span><span class="dv">8</span>, <span class="at">n_cores =</span> <span class="dv">1</span>, <span class="at">cpp =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">C++, multi-core</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">turf</span>(reach, <span class="dv">6</span><span class="sc">:</span><span class="dv">8</span>, <span class="at">n_cores =</span> <span class="dv">3</span>, <span class="at">cpp =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">times =</span> <span class="dv">10</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>microbenchmark<span class="sc">::</span><span class="fu">microbenchmark</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">R, 1 core</span><span class="st">`</span>       <span class="ot">=</span> <span class="fu">turf</span>(reach, <span class="dv">6</span><span class="sc">:</span><span class="dv">8</span>, <span class="at">n_cores =</span> <span class="dv">1</span>, <span class="at">cpp =</span> <span class="cn">FALSE</span>),</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">R, multi-core</span><span class="st">`</span>   <span class="ot">=</span> <span class="fu">turf</span>(reach, <span class="dv">6</span><span class="sc">:</span><span class="dv">8</span>, <span class="at">n_cores =</span> <span class="dv">3</span>, <span class="at">cpp =</span> <span class="cn">FALSE</span>),</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">C++, 1 core</span><span class="st">`</span>     <span class="ot">=</span> <span class="fu">turf</span>(reach, <span class="dv">6</span><span class="sc">:</span><span class="dv">8</span>, <span class="at">n_cores =</span> <span class="dv">1</span>, <span class="at">cpp =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">C++, multi-core</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">turf</span>(reach, <span class="dv">6</span><span class="sc">:</span><span class="dv">8</span>, <span class="at">n_cores =</span> <span class="dv">3</span>, <span class="at">cpp =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">times =</span> <span class="dv">10</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Unit: milliseconds
+            expr      min       lq     mean   median       uq      max neval
+       R, 1 core 503.9745 530.7443 551.9371 553.3566 575.6618 602.1642    10
+   R, multi-core 625.5841 640.0407 669.5959 661.4186 686.5645 760.6911    10
+     C++, 1 core 143.8900 147.1643 162.7554 156.8178 179.4476 194.9780    10
+ C++, multi-core 484.6684 488.3265 502.4427 494.6438 514.5312 537.9668    10</code></pre>
+</div>
 </div>
 <p><strong>Rule of thumb:</strong> Use the defaults (<code>cpp = TRUE</code>, <code>n_cores = detectCores() - 1</code>) for most analyses. The pure R fallback is available if you cannot compile C++ on a given machine.</p>
 </section>

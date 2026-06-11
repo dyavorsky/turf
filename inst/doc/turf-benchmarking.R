@@ -16,18 +16,18 @@ head(results)
 # 
 # output <- dplyr::bind_rows(res, .id = "audience")
 
-# microbenchmark::microbenchmark(
-#     `R, 1 core`       = turf(reach, 3:5, n_cores = 1, cpp = FALSE),
-#     `R, multi-core`   = turf(reach, 3:5, n_cores = 3, cpp = FALSE),
-#     `C++, 1 core`     = turf(reach, 3:5, n_cores = 1, cpp = TRUE),
-#     `C++, multi-core` = turf(reach, 3:5, n_cores = 3, cpp = TRUE),
-#     times = 10
-# )
+microbenchmark::microbenchmark(
+    `R, 1 core`       = turf(reach, 3:5, n_cores = 1, cpp = FALSE),
+    `R, multi-core`   = turf(reach, 3:5, n_cores = 3, cpp = FALSE),
+    `C++, 1 core`     = turf(reach, 3:5, n_cores = 1, cpp = TRUE),
+    `C++, multi-core` = turf(reach, 3:5, n_cores = 3, cpp = TRUE),
+    times = 10
+)
 
-# microbenchmark::microbenchmark(
-#     `R, 1 core`       = turf(reach, 6:8, n_cores = 1, cpp = FALSE),
-#     `R, multi-core`   = turf(reach, 6:8, n_cores = 3, cpp = FALSE),
-#     `C++, 1 core`     = turf(reach, 6:8, n_cores = 1, cpp = TRUE),
-#     `C++, multi-core` = turf(reach, 6:8, n_cores = 3, cpp = TRUE),
-#     times = 10
-# )
+microbenchmark::microbenchmark(
+    `R, 1 core`       = turf(reach, 6:8, n_cores = 1, cpp = FALSE),
+    `R, multi-core`   = turf(reach, 6:8, n_cores = 3, cpp = FALSE),
+    `C++, 1 core`     = turf(reach, 6:8, n_cores = 1, cpp = TRUE),
+    `C++, multi-core` = turf(reach, 6:8, n_cores = 3, cpp = TRUE),
+    times = 10
+)

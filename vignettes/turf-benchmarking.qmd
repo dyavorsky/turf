@@ -67,7 +67,6 @@ Multi-core parallelizes across bundle sizes, so the benefit scales with the numb
 ### Small task (range = 3:5)
 
 ```{r}
-#| eval: false
 microbenchmark::microbenchmark(
     `R, 1 core`       = turf(reach, 3:5, n_cores = 1, cpp = FALSE),
     `R, multi-core`   = turf(reach, 3:5, n_cores = 3, cpp = FALSE),
@@ -80,7 +79,6 @@ microbenchmark::microbenchmark(
 ### Large task (range = 6:8)
 
 ```{r}
-#| eval: false
 microbenchmark::microbenchmark(
     `R, 1 core`       = turf(reach, 6:8, n_cores = 1, cpp = FALSE),
     `R, multi-core`   = turf(reach, 6:8, n_cores = 3, cpp = FALSE),
