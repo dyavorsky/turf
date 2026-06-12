@@ -195,10 +195,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-stdout">
 <pre><code>Unit: milliseconds
             expr      min       lq     mean    median       uq      max neval
-       R, 1 core 251.9434 262.2913 310.1368 323.69385 339.9925 353.6533    10
-   R, multi-core 596.3175 619.5098 632.9746 631.19500 644.0019 677.0054    10
-     C++, 1 core  83.5963  91.6451 105.6331  98.44005 114.3121 143.8613    10
- C++, multi-core 469.8948 501.7300 531.8548 535.62570 555.0102 616.2333    10</code></pre>
+       R, 1 core 259.2065 284.7736 321.3492 311.26715 324.5369 474.9407    10
+   R, multi-core 572.2402 586.5593 597.2009 594.14540 610.1423 632.0716    10
+     C++, 1 core  85.1586  85.5986 102.6473  95.94515 112.5231 138.3871    10
+ C++, multi-core 476.6603 485.5058 496.2373 493.13675 509.2409 518.1885    10</code></pre>
 </div>
 </div>
 </section>
@@ -214,14 +214,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Unit: milliseconds
-            expr      min       lq     mean   median       uq      max neval
-       R, 1 core 503.9745 530.7443 551.9371 553.3566 575.6618 602.1642    10
-   R, multi-core 625.5841 640.0407 669.5959 661.4186 686.5645 760.6911    10
-     C++, 1 core 143.8900 147.1643 162.7554 156.8178 179.4476 194.9780    10
- C++, multi-core 484.6684 488.3265 502.4427 494.6438 514.5312 537.9668    10</code></pre>
+            expr      min       lq     mean   median        uq       max neval
+       R, 1 core 461.0925 550.7707 629.6030 630.5926  655.3876  836.7710    10
+   R, multi-core 738.1870 889.1275 955.5211 969.0758 1041.4927 1135.4504    10
+     C++, 1 core 150.4374 175.6873 205.2385 205.4014  228.1853  258.7361    10
+ C++, multi-core 482.3069 549.6729 649.9241 598.6072  711.2923 1008.2639    10</code></pre>
 </div>
 </div>
-<p><strong>Rule of thumb:</strong> Use the defaults (<code>cpp = TRUE</code>, <code>n_cores = detectCores() - 1</code>) for most analyses. The pure R fallback is available if you cannot compile C++ on a given machine.</p>
+<p><strong>Rule of thumb:</strong> Use the defaults (<code>cpp = TRUE</code>, <code>n_cores = 1</code>) for most analyses. The <code>doParallel</code> overhead exceeds the benefit when C++ finishes each bundle size in milliseconds — multi-core only helps when <code>range</code> is very long and bundle sizes are large. The pure R fallback is available if you cannot compile C++ on a given machine.</p>
 </section>
 </section>
 

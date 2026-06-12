@@ -36,8 +36,8 @@ Four execution modes are available via the `cpp` and `n_cores` arguments. See `v
 
 | Mode | Arguments |
 |------|-----------|
-| C++, multi-core (fastest, default) | `cpp = TRUE`, `n_cores = detectCores() - 1` |
-| C++, single-core | `cpp = TRUE`, `n_cores = 1` |
+| C++, single-core (fastest, default) | `cpp = TRUE`, `n_cores = 1` |
+| C++, multi-core | `cpp = TRUE`, `n_cores = detectCores() - 1` |
 | R, multi-core | `cpp = FALSE`, `n_cores = detectCores() - 1` |
 | R, single-core (slowest) | `cpp = FALSE`, `n_cores = 1` |
 

@@ -88,4 +88,4 @@ microbenchmark::microbenchmark(
 )
 ```
 
-**Rule of thumb:** Use the defaults (`cpp = TRUE`, `n_cores = detectCores() - 1`) for most analyses. The pure R fallback is available if you cannot compile C++ on a given machine.
+**Rule of thumb:** Use the defaults (`cpp = TRUE`, `n_cores = 1`) for most analyses. The `doParallel` overhead exceeds the benefit when C++ finishes each bundle size in milliseconds — multi-core only helps when `range` is very long and bundle sizes are large. The pure R fallback is available if you cannot compile C++ on a given machine.

@@ -1,5 +1,5 @@
 turf <- function(mat, range = 1:min(5, ncol(mat)), keep = 10, w = 1,
-                 n_cores = parallel::detectCores() - 1, cpp = TRUE) {
+                 n_cores = 1, cpp = TRUE) {
 
     N <- nrow(mat)
     J <- ncol(mat)
