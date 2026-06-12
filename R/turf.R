@@ -1,5 +1,5 @@
 turf <- function(mat, range = 1:min(5, ncol(mat)), keep = 10, w = 1,
-                 n_cores = 1, cpp = TRUE) {
+                 n_cores = 1, cpp = TRUE, labels = NULL) {
 
     N <- nrow(mat)
     J <- ncol(mat)
@@ -22,6 +22,12 @@ turf <- function(mat, range = 1:min(5, ncol(mat)), keep = 10, w = 1,
     if (any(!is.finite(w)))       stop("weights must be finite")
     if (any(is.na(w)))            stop("weights must not be NA")
 
+    # labels must be a character vector of length J
+    if (!is.null(labels)) {
+        if (!is.character(labels) || length(labels) != J)
+            stop("'labels' must be a character vector of length ncol(mat)")
+    }
+
     # n_cores must be reasonable
     if (n_cores < 1) stop("'n_cores' must be positive")
     if (n_cores > parallel::detectCores())
@@ -43,5 +49,15 @@ turf <- function(mat, range = 1:min(5, ncol(mat)), keep = 10, w = 1,
         if (!cpp) res_list <- foreach(i = seq_along(range)) %dopar% turf_m_r(mat, range[i], keep, w)
     }
 
-    data.table::rbindlist(res_list, fill = TRUE)
+    result <- data.table::rbindlist(res_list, fill = TRUE)
+
+    if (!is.null(labels)) {
+        item_cols <- grep("^item", names(result), value = TRUE)
+        for (col in item_cols) {
+            idx <- result[[col]]
+            result[[col]] <- ifelse(is.na(idx), NA_character_, labels[idx])
+        }
+    }
+
+    result
 }

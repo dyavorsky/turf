@@ -12,7 +12,7 @@ top-\code{keep} results (ranked by reach) are returned.
 
 \usage{
 turf(mat, range = 1:min(5, ncol(mat)), keep = 10, w = 1,
-     n_cores = parallel::detectCores() - 1, cpp = TRUE)
+     n_cores = 1, cpp = TRUE, labels = NULL)
 }
 
 \arguments{
@@ -20,14 +20,15 @@ turf(mat, range = 1:min(5, ncol(mat)), keep = 10, w = 1,
     \item{range}{A consecutive integer vector specifying the bundle sizes to evaluate. Defaults to \code{1:min(5, ncol(mat))}.}
     \item{keep}{Number of top results to return for each bundle size, ranked by reach.}
     \item{w}{A length-\code{nrow(mat)} vector of non-negative survey weights, or the scalar \code{1} for equal weights (default).}
-    \item{n_cores}{Number of cores for parallel processing. Parallelizes across bundle sizes in \code{range}. Defaults to \code{detectCores() - 1}.}
+    \item{n_cores}{Number of cores for parallel processing. Parallelizes across bundle sizes in \code{range}. Defaults to \code{1} (single-core); multi-core only helps when \code{range} is long and bundle sizes are large.}
     \item{cpp}{If \code{TRUE} (default), uses the C++ implementation. Set \code{FALSE} for the pure R fallback.}
+    \item{labels}{Optional character vector of length \code{ncol(mat)} giving item names. When provided, the \code{item1} \ldots \code{itemM} columns in the output contain names instead of column indices.}
 }
 
 \value{
 A \code{data.table} with columns \code{size}, \code{rank}, \code{reach}, \code{freq},
 and \code{item1} through \code{item}\eqn{m} (where \eqn{m = \code{max(range)}}),
-containing the indices of items in each top-ranked bundle.
+containing the indices (or names if \code{labels} is provided) of items in each top-ranked bundle.
 }
 
 \examples{

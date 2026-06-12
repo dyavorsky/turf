@@ -1,4 +1,4 @@
 useDynLib(turf)
 importFrom(data.table, rbindlist)
-import(Rcpp, foreach, parallel, doParallel, iterators)
-export(turf, turf_m_c)
+import(Rcpp, foreach, parallel, doParallel, iterators, ggplot2)
+export(turf, turf_m_c, turf_plot)

@@ -16,7 +16,7 @@ Encoding: UTF-8
 LazyData: true
 Depends:
     R (>= 4.1)
-Imports: data.table, Rcpp, foreach, parallel, iterators, doParallel
+Imports: data.table, Rcpp, foreach, parallel, iterators, doParallel, ggplot2
 LinkingTo: Rcpp
 Suggests: microbenchmark, quarto
 VignetteBuilder: knitr, quarto
